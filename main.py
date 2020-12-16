@@ -4,7 +4,16 @@ def potential(x) :
   energy = 0
   forces = np.zeros([7,2])
   # Your code goes here
-  
+  for i in range(1,7) :
+      for j in range(i) :
+          d = x[i,:]-x[j,:]
+          r2 = sum(d*d)
+          r6 = r2*r2*r2 
+          r12 = r6*r6 
+          energy = energy + 4/r12 - 4/r6
+          pref = 4*( 6/(r6*r2) - 12/(r12*r2) )
+          forces[i,:] =  forces[i,:] - pref*d
+          forces[j,:] =  forces[j,:] + pref*d
   return energy, forces
   
 
